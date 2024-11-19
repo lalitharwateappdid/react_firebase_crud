@@ -17,32 +17,45 @@ import InputLabel from "@mui/material/InputLabel";
 function App() {
 
   const [subject, setSubject] = useState("")
-
+  const [submitText, setSubmitText] = useState("Submit")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    setSubmitText("Submitting...")
     if(subject !== ""){
-      await addDoc(collection(db,"(default)"),{
-        subject,
-        completed:false
-      })
+      try{
+        await addDoc(collection(db,"cache_test"),{
+          subject,
+          completed:false
+        })
 
-      setSubject("")
+        setSubmitText("Submit")
+
+
+        setSubject("")
+      }
+      catch(error){
+       alert(error)
+      }
+
+    }
+    else{
+      alert("Subject Cannot be empty")
     }
   }
 
   return (
    <>
       <Typography variant='h4' style={{padding:"20px", fontWeight:"700", textAlign:"center"}}>React Firebase CRUD</Typography>
-      <div>
+      <div style={{display:"flex", justifyContent:"center"}}>
           <FormControl >
            
             {/* <InputLabel>Enter Subject:</InputLabel> */}
           <TextField type="text" label="Subject" fullWidth value={subject} onChange={((e) => setSubject(e.target.value))} />
 
-
-          <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+          <br />
+          <Button variant="contained" style={{display:"inline"}} onClick={handleSubmit}>{submitText}</Button>
           </FormControl>
       </div>
    </>
