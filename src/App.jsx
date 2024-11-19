@@ -19,6 +19,10 @@ function App() {
   const [subject, setSubject] = useState("")
   const [submitText, setSubmitText] = useState("Submit")
 
+  const deleteData = (id) => {
+    
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -58,6 +62,9 @@ function App() {
           <Button variant="contained" style={{display:"inline"}} onClick={handleSubmit}>{submitText}</Button>
           </FormControl>
       </div>
+
+
+      
    </>
   )
 }
